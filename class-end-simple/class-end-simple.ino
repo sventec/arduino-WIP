@@ -1,5 +1,5 @@
 //Reed Simon
-//1.0.1
+//1.2.1
 //17.04.25
 
 #include <LiquidCrystal.h>
@@ -53,6 +53,10 @@ void loop(){
                 lcd.print("12:30 PM");
                 lcd.setCursor(0, 1);
                 lcd.print("Friday");
+            } else if(day == 4){
+                lcd.print("Press once more");
+                lcd.setCursor(0, 1);
+                lcd.print("to reset week");
             }
         }
     }

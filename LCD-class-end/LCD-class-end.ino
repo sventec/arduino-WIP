@@ -1,5 +1,5 @@
 //Reed Simon
-//1.0.0
+//1.0.2
 //17.04.25
 
 #include <LiquidCrystal.h>
