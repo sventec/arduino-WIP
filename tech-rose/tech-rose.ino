@@ -6,15 +6,21 @@
 
 #include <Servo.h> //Servo library
 
+/*  ONLY USE THIS IF THE INPUTS OF THE JOYSTICKS ARE VARIABLE
+#define rec1 A0
+#define rec2 A1
+#define rec3 A2
+*/
+
 //Pin INPUTs from RC Reciever
-const byte rec1 = ;
-const byte rec2 = ;
-const byte rec3 = ;
+const byte rec1 = 3;
+const byte rec2 = 4;
+const byte rec3 = 5;
 
 //Pin OUTPUTS to Servo control pins
-const byte sPin1 = ;
-const byte sPin2 = ;
-const byte sPin3 = ;
+const byte sPin1 = 7;
+const byte sPin2 = 8;
+const byte sPin3 = 9;
 
 //Initialize servos 1-3
 Servo servo1;
@@ -47,10 +53,14 @@ void loop(){
     if(dread(rec1) == HIGH || dread(rec2) == HIGH || dread(rec3) == HIGH){
         if(dread(re1) == HIGH){
             servo1.write(/*VALUE*/);
+            delay(50);
         } else if(dread(rec2) == HIGH){
             servo2.write(/*value*/);
+            delay(50);
         } else if(dread(rec3) == HIGH){
             servo3.write(/*value*/);
+            delay(50);
         }
+        delay(30); //debouncing / power saving measure, no need to constantly check.
     }
 }
