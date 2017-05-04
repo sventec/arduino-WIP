@@ -2,7 +2,7 @@
 //2017
 //Beauty and the Beast, Proctor Academy, Spring Term 2016-17
 //Mini-servos, arduino nano, drone controller
-//1.00
+//1.11
 
 #include <Servo.h> //Servo library
 
@@ -22,17 +22,20 @@ const byte sPin1 = 7;
 const byte sPin2 = 8;
 const byte sPin3 = 9;
 
+//Debounce type thing
+bool trig1 = FALSE;
+bool trig2 = FALSE;
+bool trig3 = FALSE;
+
 //Initialize servos 1-3
 Servo servo1;
 Servo servo2;
 Servo servo3;
 
 
-byte dread(byte pin){
-    return digitalRead(pin);
-}
 
-void setup(){
+void setup()
+{
     //Init reciever pins as digital inputs
     pinMode(rec1, INPUT);
     pinMode(rec2, INPUT);
@@ -47,20 +50,45 @@ void setup(){
     servo1.attach(sPin1);
     servo2.attach(sPin2);
     servo3.attach(sPin3);
+
+    //Reset all servos
+    servo1.write(0);
+    servo2.write(0);
+    servo3.write(0);
 }
 
-void loop(){
-    if(dread(rec1) == HIGH || dread(rec2) == HIGH || dread(rec3) == HIGH){
-        if(dread(re1) == HIGH){
-            servo1.write(/*VALUE*/);
-            delay(50);
-        } else if(dread(rec2) == HIGH){
-            servo2.write(/*value*/);
-            delay(50);
-        } else if(dread(rec3) == HIGH){
-            servo3.write(/*value*/);
-            delay(50);
+void loop()
+{
+
+    if(digitalRead(rec1) == HIGH || digitalRead(rec2) == HIGH || digitalRead(rec3) == HIGH){
+        if(digitalRead(rec1) == HIGH){
+            if(trig1 == FALSE){
+                servo1.write(90);
+                trig1 = TRUE;
+                delay(50);
+            }
         }
-        delay(30); //debouncing / power saving measure, no need to constantly check.
+
+        else if(digitalRead(rec2) == HIGH){
+            if(trig2 == FALSE){
+                servo2.write(90);
+                trig2 = TRUE;
+                delay(50);
+            }
+        }
+
+        else if(digitalRead(rec3) == HIGH){
+            if(trig3 == FALSE){
+                servo3.write(90);
+                trig3 = TRUE;
+                delay(50);
+            }
+        }
+
+        else
+        {
+
+        }
+        delay(30); //no need to be constantly checking/looping
     }
 }
